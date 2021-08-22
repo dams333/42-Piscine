@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 11:34:12 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/22 15:01:17 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/22 19:55:06 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,30 @@ int		str_len(char *str);
 void	ft_putstr(char *str);
 int		ft_strcmp(char	*s1, char	*s2);
 
-void	ft_big_num(int i, t_stock *strtab, char *next)
+void	ft_big_num(int i, t_stock *strtab, char **next, int count)
 {
 	char	*str;
 	int		j;
 
-	j = 1;
+	j = 0;
 	str = malloc(sizeof(char) * ((i - 1) * 3 + 2));
 	if (!str)
 		return ;
 	str[0] = '1';
-	while (j < ((i - 1) * 3 + 1))
-	{
+	while (++j < ((i - 1) * 3 + 1))
 		str[j] = '0';
-		j++;
-	}
 	str[j] = '\0';
 	write(1, " ", 1);
 	ft_print_num(str, strtab);
-	if (ft_strcmp(next, "000") != 0)
-		write(1, " ", 1);
+	j = 0;
+	while (++j < count)
+	{
+		if (ft_strcmp(next[j], "000") != 0)
+		{	
+			write(1, " ", 1);
+			break ;
+		}
+	}
 	free(str);
 }
 

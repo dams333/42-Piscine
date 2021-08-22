@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 11:34:34 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/22 15:03:03 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/22 19:57:58 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		str_count(char *str);
 char	*add_zero(char *str);
 void	ft_print_num(char *str, t_stock *tab);
 void	ft_print_array(char *str, t_stock *strtab);
-void	ft_big_num(int i, t_stock *strtab, char *next);
+void	ft_big_num(int i, t_stock *strtab, char **next, int count);
+int		ft_strcmp(char	*s1, char	*s2);
 
 int	is_zero(char *str)
 {
@@ -54,6 +55,17 @@ void	end_processus(char **tab, int length, char *str)
 	write(1, "\n", 1);
 }
 
+int	not_next_zero(char **tab, int current, int count)
+{
+	if(ft_strcmp(tab[current], "000") != 0)
+		return 1;
+	current++;
+	if(current < count && ft_strcmp(tab[current], "000") != 0)
+		return 1;
+
+	return 0;
+}
+
 void	ft_rush(char *arg, t_stock *strtab)
 {
 	char	**tab;
@@ -74,11 +86,12 @@ void	ft_rush(char *arg, t_stock *strtab)
 	j = -1;
 	while (++j < i)
 	{
+		k--;
 		ft_print_array(tab[j], strtab);
 		if (i == 1 && is_zero(tab[j]))
 			ft_print_num("0", strtab);
-		if (j != i - 1)
-			ft_big_num(k--, strtab, tab[j + 1]);
+		if (j != i - 1 && not_next_zero(tab, j, i))
+			ft_big_num(k, strtab, tab + j, i - j);
 	}
 	end_processus(tab, i, str);
 }
