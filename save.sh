@@ -14,8 +14,6 @@ cd save
 find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
 
 #git save
-read -p 'Choisir un nom de commit: ' commit_name
-
 git add .
-git commit -m '$commit_name'
+git commit -m "Save Commit"
 git push

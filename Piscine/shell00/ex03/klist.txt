@@ -1,0 +1,5 @@
+Credentials cache: API:F0272136-9581-4605-B7DE-5C71C03C6E51
+        Principal: dhubleur@42.FR
+
+  Issued                Expires               Principal
+Aug  2 12:43:53 2021  Aug  9 12:43:53 2021  krbtgt/42.FR@42.FR
