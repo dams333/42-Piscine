@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 14:41:06 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 15:22:26 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/23 16:50:50 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,58 +25,77 @@ int	get_min(int a, int b, int c)
 
 int	main()
 {
+
 	// 0 = free
 	// 1 = obstacle
 	// 2 = full
-	int grid[5][5] = {
-		{0, 1, 1, 0, 0}, 
-		{0, 0, 1, 0, 0},
-		{1, 0, 0, 0, 0},
-		{0, 0, 0, 1, 1},
-		{0, 0, 1, 0, 0}
+	int grid[LINE_COUNT][LINE_SIZE] = {
+		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 	};
 
 	// free => -1
 	// obsacle => 0
 	// -1 is modifiable
 	// >= 0 is fixed
-	int grid_solve[5][5] = {
-		{-1, 0, 0, -1, -1}, 
-		{-1, -1, 0, -1, -1},
-		{0, -1, -1, -1, -1},
-		{-1, -1, -1, 0, 0},
-		{-1, -1, 0, -1, -1}
-	};
+	int grid_solve[LINE_COUNT][LINE_SIZE];
 
+
+	for(int i = 0; i < LINE_COUNT; i++)
+	{
+		for(int j = 0; j < LINE_SIZE; j++)
+		{
+			grid_solve[i][j] = grid[i][j] - 1;
+		}
+	}
+
+	/*printf("----- RESOLUTION GRID -----\n");
+	for(int i = 0; i < LINE_COUNT; i++)
+	{
+		for(int j = 0; j < LINE_SIZE; j++)
+		{
+			printf("%d ", grid_solve[i][j]);
+		}
+		printf("\n");
+	}*/
 
 	char free = '.';
 	char obstacle = 'o';
 	char full = 'X';
 
 	printf("----- GRID -----\n");
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < LINE_COUNT; i++)
 	{
-		for(int j = 0; j < 5; j++)
+		for(int j = 0; j < LINE_SIZE; j++)
 		{
-			printf("%d ", grid[i][j]);
+			if(grid[i][j] == 0)
+			{
+				write(1, &free, 1);
+			}
+			if(grid[i][j] == 1)
+			{
+				write(1, &obstacle, 1);
+			}
+			if(grid[i][j] == 2)
+			{
+				write(1, &full, 1);
+			}
+			write(1, " ", 1);
 		}
 		printf("\n");
 	}
 
-	printf("----- PRE SOLVE -----\n");
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < LINE_COUNT; i++)
 	{
-		for(int j = 0; j < 5; j++)
-		{
-			printf("%d ", grid_solve[i][j]);
-		}
-		printf("\n");
-	}
-
-
-	for(int i = 0; i < 5; i++)
-	{
-		for(int j = 0; j < 5; j++)
+		for(int j = 0; j < LINE_SIZE; j++)
 		{
 			if(grid_solve[i][j] == - 1)
 			{
@@ -95,25 +114,13 @@ int	main()
 		}
 	}
 
-	printf("----- SOLVE -----\n");
-	for(int i = 0; i < 5; i++)
-	{
-		for(int j = 0; j < 5; j++)
-		{
-			printf("%d ", grid_solve[i][j]);
-		}
-		printf("\n");
-	}
-
-
-
 	int i_bigger = 0;
 	int j_bigger = 0;
 	int bigger = grid_solve[0][0];
 
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < LINE_COUNT; i++)
 	{
-		for(int j = 0; j < 5; j++)
+		for(int j = 0; j < LINE_SIZE; j++)
 		{
 			if(grid_solve[i][j] > bigger)
 			{
@@ -135,12 +142,21 @@ int	main()
 		}
 	}
 
-
-
-	printf("----- GRID -----\n");
-	for(int i = 0; i < 5; i++)
+	/*printf("----- RESOLUTION GRID -----\n");
+	for(int i = 0; i < LINE_COUNT; i++)
 	{
-		for(int j = 0; j < 5; j++)
+		for(int j = 0; j < LINE_SIZE; j++)
+		{
+			printf("%d ", grid_solve[i][j]);
+		}
+		printf("\n");
+	}*/
+
+
+	printf("----- SOLVE -----\n");
+	for(int i = 0; i < LINE_COUNT; i++)
+	{
+		for(int j = 0; j < LINE_SIZE; j++)
 		{
 			if(grid[i][j] == 0)
 			{
