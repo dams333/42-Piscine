@@ -16,7 +16,7 @@ alias norm="norminette -R CheckForbiddenSourceHeader"
 alias normh="norminette -R CheckDefine"
 alias gc42="gcc -Wall -Wextra -Werror"
 alias work="cd ~/Documents/Piscine"
-alias forcesave="~/shell && ./save.sh"
+alias forcesave="~/shell && ./save.sh &7 work"
 
 function cd()
 {
