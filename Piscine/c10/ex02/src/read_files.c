@@ -6,16 +6,18 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 14:08:19 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 18:43:09 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/23 20:27:44 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_tail.h"
 
-void	print_error(char *file, int *failed, int first)
+void	print_error(char *file, int *failed, int first, int prev)
 {
 	char	*error;
 
+	if (*failed && prev)
+		write(2, "\n", 1);
 	*failed = 1;
 	write(2, g_program_name, ft_strlen(g_program_name));
 	write(2, ": ", 2);
@@ -75,7 +77,7 @@ int	read_last_all_files(int offset, int argc, int first, char **argv)
 		failed = 0;
 		f_descriptor = open(argv[i], O_RDONLY);
 		if (f_descriptor == -1)
-			print_error(argv[i], &failed, (i == first));
+			print_error(argv[i], &failed, (i == first), ((i - 1) == first));
 		else
 		{
 			if (!failed && i != first && multiple)

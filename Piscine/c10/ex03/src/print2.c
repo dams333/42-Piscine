@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 17:37:34 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 18:42:45 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/23 20:34:12 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,18 @@ void	print_not_complete(char *b1, char *b2, t_files_infos fi, int b1_readed)
 	write(1, "\n", 1);
 }
 
-void	print_offset(int	offset)
+void	print_offset(int	offset, char *buffer)
 {
 	char	code[9];
 	int		i;
 
-	i = -1;
-	while (++i < 8)
-		code[i] = '0';
-	tr_offset_to_hex(offset, code, 7);
-	ft_putstr(code);
-	write(1, "\n", 1);
+	if (buffer[0] != '\0')
+	{
+		i = -1;
+		while (++i < 8)
+			code[i] = '0';
+		tr_offset_to_hex(offset, code, 7);
+		ft_putstr(code);
+		write(1, "\n", 1);
+	}
 }

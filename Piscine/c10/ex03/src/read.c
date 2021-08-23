@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 14:17:51 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 18:42:46 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/23 20:32:23 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ void	read_file(t_files_infos f_infos, char *p_name)
 		if (f_infos.current_fd != -2)
 			readed = read(f_infos.current_fd, r_buffer, 16);
 	}
-	print_offset(f_infos.offset);
+	print_offset(f_infos.offset, r_buffer);
 }
