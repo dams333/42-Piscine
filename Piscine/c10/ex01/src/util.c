@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_resolve.h                                     :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/23 14:41:27 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 18:51:21 by dhubleur         ###   ########.fr       */
+/*   Created: 2021/08/23 17:59:41 by dhubleur          #+#    #+#             */
+/*   Updated: 2021/08/23 18:01:33 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_RESOLVE_H
-# define TEST_RESOLVE_H
+#include "ft_cat.h"
 
-# define LINE_COUNT 7
-# define LINE_SIZE 7
+int	ft_strlen(char *str)
+{
+	int	i;
 
-# include <stdio.h>
-# include <unistd.h>
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
-#endif
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}

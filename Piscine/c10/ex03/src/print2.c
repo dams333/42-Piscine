@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 17:37:34 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/22 17:39:59 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/23 18:42:45 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print_without(t_files_infos *fi, char *b1, int readed)
 {
 	int	i;
+	int	space_to_print;
 
 	i = -1;
 	fi->offset += readed;
@@ -24,6 +25,10 @@ void	print_without(t_files_infos *fi, char *b1, int readed)
 		if (i != readed - 1)
 			write(1, " ", 1);
 	}
+	space_to_print = 47 - (readed * 2 + (readed - 1));
+	i = -1;
+	while (++i < space_to_print)
+		write(1, " ", 1);
 }
 
 void	print_with(t_files_infos *fi, char *b1, int readed)
@@ -75,10 +80,17 @@ void	print_not_complete(char *b1, char *b2, t_files_infos fi, int b1_readed)
 	else
 		print_with(&fi, b1, readed);
 	write(1, "\n", 1);
+}
+
+void	print_offset(int	offset)
+{
+	char	code[9];
+	int		i;
+
 	i = -1;
 	while (++i < 8)
 		code[i] = '0';
-	tr_offset_to_hex(fi.offset, code, 7);
+	tr_offset_to_hex(offset, code, 7);
 	ft_putstr(code);
 	write(1, "\n", 1);
 }
