@@ -6,18 +6,16 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 14:08:19 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 20:27:44 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/23 21:42:19 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_tail.h"
 
-void	print_error(char *file, int *failed, int first, int prev)
+void	print_error(char *file, int *failed)
 {
 	char	*error;
 
-	if (*failed && prev)
-		write(2, "\n", 1);
 	*failed = 1;
 	write(2, g_program_name, ft_strlen(g_program_name));
 	write(2, ": ", 2);
@@ -25,17 +23,18 @@ void	print_error(char *file, int *failed, int first, int prev)
 	write(2, ": ", 2);
 	error = strerror(errno);
 	write(2, error, ft_strlen(error));
-	if (!first)
-		write(2, "\n", 1);
+	write(2, "\n", 1);
 }
 
-int	read_file(int fd, int offset)
+int	read_file(int fd, int offset, int *has_success, int *failed)
 {
 	int		readed;
 	int		total_readed;
 	char	buffer[SIZE_BUFFER];
 	char	*wanted_data;
 
+	*failed = 0;
+	*has_success = 1;
 	total_readed = 0;
 	wanted_data = malloc(sizeof(*wanted_data) * offset);
 	readed = read(fd, buffer, SIZE_BUFFER);
@@ -69,22 +68,23 @@ int	read_last_all_files(int offset, int argc, int first, char **argv)
 	int	i;
 	int	multiple;
 	int	failed;
+	int	has_success;
 
 	multiple = ((first + 1) != argc);
 	i = first - 1;
+	has_success = 0;
 	while (++i < argc)
 	{
-		failed = 0;
 		f_descriptor = open(argv[i], O_RDONLY);
 		if (f_descriptor == -1)
-			print_error(argv[i], &failed, (i == first), ((i - 1) == first));
+			print_error(argv[i], &failed);
 		else
 		{
-			if (!failed && i != first && multiple)
+			if (!failed && multiple && has_success)
 				write(1, "\n", 1);
 			if (multiple)
 				print_file_name(argv[i]);
-			read_file(f_descriptor, offset);
+			read_file(f_descriptor, offset, &has_success, &failed);
 		}
 		close(f_descriptor);
 	}
@@ -93,6 +93,8 @@ int	read_last_all_files(int offset, int argc, int first, char **argv)
 
 int	read_last_standard_input(int offset)
 {
-	read_file(0, offset);
+	int	i;
+
+	read_file(0, offset, &i, &i);
 	return (0);
 }
