@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 14:17:51 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 09:01:11 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 11:20:59 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	*get_complete(t_files_infos *f_infos, int nb, char *p_name)
 	i = -1;
 	while (++i <= nb)
 		buffer[i] = 0;
-	close(f_infos->current_fd);
-	f_infos->current_fd = -2;
+	if (f_infos->current_fd != 0)
+		close(f_infos->current_fd);
 	file = f_infos->current;
 	while (++file < f_infos->file_count && completed < nb)
 	{
@@ -102,5 +102,5 @@ void	read_file(t_files_infos f_infos, char *p_name)
 		if (f_infos.current_fd != -2)
 			readed = read(f_infos.current_fd, r_buffer, 16);
 	}
-	print_offset(f_infos.offset, r_buffer);
+	print_offset(f_infos.offset, r_buffer, f_infos.option, 1);
 }

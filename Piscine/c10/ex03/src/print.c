@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:50:23 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 08:51:59 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 09:44:38 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,9 @@ void	print_chars(char *buffer)
 
 void	print_complete(char *buffer, int option, int offset)
 {
-	char	code[9];
 	int		i;
 
-	i = -1;
-	while (++i < 8)
-		code[i] = '0';
-	tr_offset_to_hex(offset, code, 7);
-	ft_putstr(code);
+	print_offset(offset, buffer, option, 0);
 	write(1, " ", 1);
 	if (option)
 		write(1, " ", 1);

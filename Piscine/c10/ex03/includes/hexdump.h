@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 13:44:14 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 20:33:45 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 09:48:04 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	print_some_chars(char *buffer, int n);
 void	tr_offset_to_hex(int offset, char *code, int i);
 int		open_file(char *file, char *p_name);
 void	read_file(t_files_infos f_infos, char *p_name);
-void	print_offset(int offset, char *buffer);
+void	print_offset(int offset, char *buffer, int option, int lb);
 
 #endif
