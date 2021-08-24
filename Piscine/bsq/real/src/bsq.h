@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solve.h                                            :+:      :+:    :+:   */
+/*   bsq.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/24 11:50:51 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 14:31:07 by dhubleur         ###   ########.fr       */
+/*   Created: 2021/08/24 14:31:13 by dhubleur          #+#    #+#             */
+/*   Updated: 2021/08/24 15:29:56 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOLVE_H
-# define SOLVE_H
+#ifndef BSQ_H
+# define BSQ_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-// line_length = taille d une ligne
-// line_count = nombre de ligne
 typedef struct s_map
 {
    int  *map;
@@ -33,11 +27,25 @@ typedef struct s_elements
     char  full;
 }  t_elements;
 
-int		get_element(int line, int column, t_map map);
-void	set_element(int line, int column, int i, t_map *map);
-t_map	*map_copy(t_map map, int modificator);
+typedef struct s_file
+{
+	int		fd;
+	int		i;
+	int		end;
+	char	buf[SIZE_BUF];
+}	t_file;
+
 void	solve(t_map *map);
-void	replace_in_original(t_map *map, int i_bigger, int j_bigger, int bigger);
 void	print_map_with_symbols(t_map map, t_elements elements);
+
+// 0 => good
+// 1 => aled
+// 2 => deja pleine
+int	parse(ft_file *file, t_elements *elements, t_map *map);
+
+//t_file.end = 0 => error
+t_file	open_file(char *path);
+
+int		close_file(t_file file);
 
 #endif
