@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:30:54 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 15:37:04 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:43:16 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parse_and_solve(t_file file)
 	t_elements	*el;
 	t_map		*map;
 
-	result = parse(file, el, map);
+	result = parse(&file, el, map);
 	if(result == 1)
 		write(2, "map error\n", 10);
 	if(result == 2)
@@ -26,13 +26,12 @@ void	parse_and_solve(t_file file)
 	if(result == 3)
 	{
 		solve(map);
-		print_map_with_symbols(*map, *el)
+		print_map_with_symbols(*map, *el);
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int		result;
 	int		i;
 	t_file	file;
 
