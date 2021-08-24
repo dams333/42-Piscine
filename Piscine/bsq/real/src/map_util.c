@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 11:51:50 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 14:08:42 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 16:11:05 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	replace_in_original(t_map *map, int i_bigger, int j_bigger, int bigger)
 	int	j;
 
 	i = -1;
-	while(++i < bigger)
+	while (++i < bigger)
 	{
 		j = -1;
-		while(++j < bigger)
+		while (++j < bigger)
 		{
 			set_element(i_bigger - i, j_bigger - j, 2, map);
 		}
