@@ -19,9 +19,9 @@ alias work="cd ~/Documents/Piscine"
 
 function fsave()
 {
-	$PREVPWD = $PWD
+	$PREVPWD=$PWD
 	cd ~/shell && ./save.sh
-	cd $pwd
+	cd $PREVPWD
 }
 alias forcesave="~/shell && ./save.sh && cd ~/Documents/Piscine"
 
