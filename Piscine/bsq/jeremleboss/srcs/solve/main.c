@@ -6,12 +6,12 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:30:54 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 22:25:27 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 22:58:03 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
-#include <stdio.h>
+
 void	parse_and_solve(t_file file)
 {
 	int			result;
@@ -19,19 +19,13 @@ void	parse_and_solve(t_file file)
 	t_map		map;
 
 	result = parse(&file, &el, &map);
-
-	printf("----- BEFORE -----\n");
-	print_map_with_symbols(map, el);
-
 	if (result == 1)
 		write(2, "map error\n", 10);
 	if (result == 2)
-		printf("----- AFTER -----\n");
 		print_map_with_symbols(map, el);
 	if (result == 0)
 	{
 		solve(&map);
-		printf("----- AFTER -----\n");
 		print_map_with_symbols(map, el);
 	}
 }

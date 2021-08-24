@@ -1,0 +1,1 @@
+clear && perl resources/gen.pl X Y D > test.map && time ./bsq test.map1
