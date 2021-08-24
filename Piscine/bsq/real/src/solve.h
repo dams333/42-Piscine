@@ -6,15 +6,16 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 11:50:51 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 12:54:24 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:23:35 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SOLVE_H
 # define SOLVE_H
 
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 // line_length = taille d une ligne
 // line_count = nombre de ligne
@@ -32,10 +33,12 @@ typedef struct s_elements
     char  full;
 }  t_elements;
 
-int	get_element(int line, int column, t_map map);
+int		get_element(int line, int column, t_map map);
 void	print_map(t_map map);
 void	set_element(int line, int column, int i, t_map *map);
 t_map	*map_copy(t_map map, int modificator);
-void	solve(t_map map);
+void	solve(t_map *map);
+void	replace_in_original(t_map *map, int i_bigger, int j_bigger, int bigger);
+void	print_map_with_symbols(t_map map, t_elements elements);
 
 #endif

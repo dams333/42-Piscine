@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 11:51:50 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 12:43:46 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:08:42 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@ int	get_element(int line, int column, t_map map)
 	return (map.map[index]);
 }
 
-void	set_element(int line, int column, int i, t_map map)
+void	set_element(int line, int column, int i, t_map *map)
 {
 	int	index;
 
-	index = (line * map.line_length);
+	index = (line * (map->line_length));
 	index += column;
-	map.map[index] = i;
+	(map->map)[index] = i;
 }
 
 t_map	*map_copy(t_map map, int modificator)
 {
-	int	i;
-	int	elements_count;
+	int		i;
+	int		elements_count;
+	t_map	*dup;
 
 	elements_count = map.line_length * map.line_count;
-	t_map *dup = malloc(sizeof(*dup));
+	dup = malloc(sizeof(*dup));
 	dup->line_length = map.line_length;
 	dup->line_count = map.line_count;
 	dup->map = malloc(sizeof(int) * elements_count);
@@ -47,4 +48,20 @@ t_map	*map_copy(t_map map, int modificator)
 		i++;
 	}
 	return (dup);
+}
+
+void	replace_in_original(t_map *map, int i_bigger, int j_bigger, int bigger)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while(++i < bigger)
+	{
+		j = -1;
+		while(++j < bigger)
+		{
+			set_element(i_bigger - i, j_bigger - j, 2, map);
+		}
+	}
 }

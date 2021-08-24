@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 12:31:22 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 12:54:38 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:25:32 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	set_case(t_map *map, int i, int j)
 	int	top;
 	int	min;
 
-	left = get_element(i, j - 1, map);
-	diag = get_element(i - 1, j - 1, map);
-	top = get_element(i - 1, j, map);
+	left = get_element(i, j - 1, *map);
+	diag = get_element(i - 1, j - 1, *map);
+	top = get_element(i - 1, j, *map);
 	min = get_min(left, diag, top);
-	set_element(i, j, min + 1, map)
+	set_element(i, j, min + 1, map);
 }
 
 void	set_all_squares(t_map *map)
@@ -48,10 +48,10 @@ void	set_all_squares(t_map *map)
 		j = 0;
 		while(j < map->line_length)
 		{
-			if(get_elements(i, j, *map) == -1)
+			if(get_element(i, j, *map) == -1)
 			{
 				if(i == 0 || j == 0)
-					set_element(i, j, 1, *map);
+					set_element(i, j, 1, map);
 				else
 					set_case(map, i, j);
 			}
@@ -61,8 +61,39 @@ void	set_all_squares(t_map *map)
 	}
 }
 
-void	solve(t_map map)
+void	search_bigger(t_map *map, t_map *solve)
 {
-	t_map *copy = map_copy(map, -1);
-	print_map(*copy);
+	int	i_bigger;
+	int	j_bigger;
+	int	bigger;
+	int	i;
+	int	j;
+
+	i_bigger = 0;
+	j_bigger = 0;
+	bigger = get_element(0, 0, *solve);
+	i = -1;
+	while(++i < solve->line_count)
+	{
+		j = -1;
+		while(++j < solve->line_length)
+		{
+			if(get_element(i, j, *solve) > bigger)
+			{
+				bigger = get_element(i, j, *solve);
+				i_bigger = i;
+				j_bigger = i;
+			}
+		}
+	}
+	replace_in_original(map, i_bigger, j_bigger, bigger);
+}
+
+void	solve(t_map *map)
+{
+	t_map *copy;
+
+   	copy = map_copy(*map, -1);
+	set_all_squares(copy);
+	search_bigger(map, copy);
 }

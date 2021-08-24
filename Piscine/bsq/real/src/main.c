@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 12:14:57 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 12:43:24 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:25:26 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,17 @@ int	main()
 	map_struct.line_length = line_length;
 	map_struct.line_count = line_count;
 
-	print_map(map_struct);
-	solve(map_struct);
+	t_elements el;
+	el.empty = '.';
+	el.obstacle = 'o';
+	el.full = 'X';
+
+
+	print_map_with_symbols(map_struct, el);
+	solve(&map_struct);
+
+	printf("--------- GRID ----------\n");
+	print_map_with_symbols(map_struct, el);
 }
 
 void	print_map(t_map map)
