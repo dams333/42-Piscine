@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 11:50:51 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 16:14:20 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:46:49 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_elements
 	char	full;
 }	t_elements;
 
-int		get_element(int line, int column, t_map map);
+int		get_element_in_map(int line, int column, t_map map);
 void	set_element(int line, int column, int i, t_map *map);
 t_map	*map_copy(t_map map, int modificator);
 void	solve(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:13:00 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 16:11:33 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:27:15 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_map_with_symbols(t_map map, t_elements elements)
 		j = -1;
 		while (++j < map.line_length)
 		{
-			print_symbol(get_element(i, j, map), elements);
+			print_symbol(get_element_in_map(i, j, map), elements);
 			if (j < (map.line_length - 1))
 				write(1, " ", 1);
 		}

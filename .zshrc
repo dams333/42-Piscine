@@ -19,7 +19,7 @@ alias work="cd ~/Documents/Piscine"
 
 function fsave()
 {
-	local PREVPWD=$PWD
+	local PREVPWD = $PWD
 	cd ~/shell && ./save.sh
 	cd $PREVPWD
 }

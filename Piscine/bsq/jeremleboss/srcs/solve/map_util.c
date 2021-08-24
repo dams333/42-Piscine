@@ -6,13 +6,13 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 11:51:50 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 16:11:05 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:53:04 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solve.h"
 
-int	get_element(int line, int column, t_map map)
+int	get_element_in_map(int line, int column, t_map map)
 {
 	int	index;
 

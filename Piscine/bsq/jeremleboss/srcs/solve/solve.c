@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 12:31:22 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 16:13:15 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:53:03 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	set_case(t_map *map, int i, int j)
 	int	top;
 	int	min;
 
-	left = get_element(i, j - 1, *map);
-	diag = get_element(i - 1, j - 1, *map);
-	top = get_element(i - 1, j, *map);
+	left = get_element_in_map(i, j - 1, *map);
+	diag = get_element_in_map(i - 1, j - 1, *map);
+	top = get_element_in_map(i - 1, j, *map);
 	min = get_min(left, diag, top);
 	set_element(i, j, min + 1, map);
 }
@@ -48,7 +48,7 @@ void	set_all_squares(t_map *map)
 		j = 0;
 		while (j < map->line_length)
 		{
-			if (get_element(i, j, *map) == -1)
+			if (get_element_in_map(i, j, *map) == -1)
 			{
 				if (i == 0 || j == 0)
 					set_element(i, j, 1, map);
@@ -71,18 +71,18 @@ void	search_bigger(t_map *map, t_map *solve)
 
 	i_bigger = 0;
 	j_bigger = 0;
-	bigger = get_element(0, 0, *solve);
+	bigger = get_element_in_map(0, 0, *solve);
 	i = -1;
 	while (++i < solve->line_count)
 	{
 		j = -1;
 		while (++j < solve->line_length)
 		{
-			if (get_element(i, j, *solve) > bigger)
+			if (get_element_in_map(i, j, *solve) > bigger)
 			{
-				bigger = get_element(i, j, *solve);
+				bigger = get_element_in_map(i, j, *solve);
 				i_bigger = i;
-				j_bigger = i;
+				j_bigger = j;
 			}
 		}
 	}
