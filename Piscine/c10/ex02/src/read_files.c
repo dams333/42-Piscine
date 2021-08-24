@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 14:08:19 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/23 21:42:19 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/24 08:51:17 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	read_last_all_files(int offset, int argc, int first, char **argv)
 			print_error(argv[i], &failed);
 		else
 		{
-			if (!failed && multiple && has_success)
+			if (multiple && has_success)
 				write(1, "\n", 1);
 			if (multiple)
 				print_file_name(argv[i]);
