@@ -6,7 +6,7 @@
 #    By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 21:50:50 by dhubleur          #+#    #+#              #
-#    Updated: 2021/08/18 22:01:37 by dhubleur         ###   ########.fr        #
+#    Updated: 2021/08/25 16:59:22 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBNAME	= util
 all:		${NAME}
 
 ${NAME}:	${OBJS}
-				${CC} -L${LIBDIR} -l${LIBNAME} -o ${NAME} ${OBJS}
+				${CC} -o ${NAME} ${OBJS}
 
 clean:
 				rm -rf ${OBJS}
