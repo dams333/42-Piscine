@@ -6,7 +6,7 @@
 /*   By: jmaia <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 12:48:39 by jmaia             #+#    #+#             */
-/*   Updated: 2021/08/24 19:39:04 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/08/25 12:01:07 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ t_char_file	get_next_char(t_file *file)
 	t_char_file	c;
 
 	c.is_end = 0;
-	if (file->end == 0)
-	{
-		c.is_end = 1;
-		return (c);
-	}
 	if (file->i == file->end)
 	{
 		readed = read(file->fd, file->buf, SIZE_BUF);
 		file->end = readed;
 		file->i = 0;
+	}
+	if (file->end == 0)
+	{
+		c.is_end = 1;
+		return (c);
 	}
 	c.c = file->buf[file->i++];
 	return (c);

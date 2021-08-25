@@ -30,4 +30,4 @@ fclean	:	clean
 
 re		:	fclean	${NAME}
 
-.PHONY	:	all build clean fclean re
+.PHONY	:	all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: jmaia <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 17:00:17 by jmaia             #+#    #+#             */
-/*   Updated: 2021/08/24 19:37:06 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/08/25 10:42:18 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	parse_map(t_file *file, t_elements *elements, t_map *map)
 	while (!is_end_reached(file) && !has_error)
 	{
 		c = get_next_char(file);
-		if (c.c == '\n')
+		if (c.c == '\n' && !c.is_end)
 		{
 			if (map->map == 0)
 				map->map = malloc(sizeof(*map->map) * line.i * map->line_count);
@@ -43,7 +43,7 @@ int	parse_map(t_file *file, t_elements *elements, t_map *map)
 		else
 			append(&line, c.c);
 	}
-	if (line_count != map->line_count)
+	if (line_count != map->line_count || line_count == 0)
 		has_error = 1;
 	return (has_error);
 }

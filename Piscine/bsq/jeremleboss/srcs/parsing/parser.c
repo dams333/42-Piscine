@@ -6,7 +6,7 @@
 /*   By: jmaia <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 12:18:06 by jmaia             #+#    #+#             */
-/*   Updated: 2021/08/24 19:51:27 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/08/25 12:07:30 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_first_line(t_file *file, t_elements *elements, int *n_line)
 	}
 	*n_line = ft_mini_atoi(buf.buf, buf.i - 3);
 	free(buf.buf);
-	if (*n_line == -1)
+	if (*n_line == -1 || *n_line == 0)
 		return (1);
 	return (has_error);
 }
@@ -83,7 +83,7 @@ int	parse(t_file *file, t_elements *elements, t_map *map)
 		if (map->map[i++] == 0)
 			empty_found = 1;
 	}
-	if (!empty_found)
+	if (!empty_found && !has_error)
 		return (2);
 	return (has_error);
 }
