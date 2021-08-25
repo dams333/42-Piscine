@@ -6,7 +6,7 @@
 /*   By: dhubleur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 14:17:51 by dhubleur          #+#    #+#             */
-/*   Updated: 2021/08/24 11:20:59 by dhubleur         ###   ########.fr       */
+/*   Updated: 2021/08/25 09:33:34 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_complete(t_files_infos *f_infos, int nb, char *p_name)
 	return (buffer);
 }
 
-void	complete_buffer(int readed, char *r_buf, char *c_buf, t_files_infos *fi)
+int	complete_buffer(int readed, char *r_buf, char *c_buf, t_files_infos *fi)
 {
 	int	i;
 
@@ -76,7 +76,7 @@ void	complete_buffer(int readed, char *r_buf, char *c_buf, t_files_infos *fi)
 	while (++i < (16 - readed))
 		r_buf[readed + i] = c_buf[i];
 	print_complete(r_buf, fi->option, fi->offset);
-	fi->offset += 16;
+	return (16);
 }
 
 void	read_file(t_files_infos f_infos, char *p_name)
@@ -96,11 +96,11 @@ void	read_file(t_files_infos f_infos, char *p_name)
 			if (ft_strlen(c_buffer) != (16 - readed))
 				print_not_complete(r_buffer, c_buffer, f_infos, readed);
 			else
-				complete_buffer(readed, r_buffer, c_buffer, &f_infos);
+				readed = complete_buffer(readed, r_buffer, c_buffer, &f_infos);
 		}
-		f_infos.offset = f_infos.offset + readed;
+		f_infos.offset += readed;
 		if (f_infos.current_fd != -2)
-			readed = read(f_infos.current_fd, r_buffer, 16);
+			readed = read_next(&f_infos, r_buffer, p_name);
 	}
 	print_offset(f_infos.offset, r_buffer, f_infos.option, 1);
 }
