@@ -17,10 +17,10 @@ build	:
 	mkdir -p build/parsing build/solve
 
 build/%.o	: srcs/%.c
-	gcc ${CFLAGS} -c $< -I${INCLUDE} -o $@ -g
+	gcc ${CFLAGS} -c $< -I${INCLUDE} -o $@
 
 $(NAME)	:	build ${OBJS_PATH}
-	gcc ${OBJS_PATH} -o $(NAME) -g
+	gcc ${OBJS_PATH} -o $(NAME)
 
 clean	:
 	rm -Rf build
