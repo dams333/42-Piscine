@@ -15,15 +15,9 @@ alias vimconf="vim ~/.vimrc"
 alias norm="norminette -R CheckForbiddenSourceHeader"
 alias normh="norminette -R CheckDefine"
 alias gc42="gcc -Wall -Wextra -Werror"
-alias work="cd ~/Documents/Piscine"
+alias work="cd ~/Documents/Piscine/work"
 
-function fsave()
-{
-	local PREVPWD = $PWD
-	cd ~/shell && ./save.sh
-	cd $PREVPWD
-}
-alias forcesave="~/shell && ./save.sh && cd ~/Documents/Piscine"
+alias fsave="~/shell && ./save.sh && cd ~/Documents/Piscine/work"
 
 function cd()
 {
